@@ -1,0 +1,17 @@
+.idea
+.DS_Store
+.babelrc
+.eslintrc.yml
+.editorconfig
+.gitignore
+.npmignore
+.travis.yml
+/npm-debug.log
+/Makefile
+/webpack.config.min.js
+/webpack.config.js
+
+/node_modules
+/scripts
+/demo
+/test

@@ -1,0 +1,33 @@
+{
+  "name": "ansi.js",
+  "version": "0.0.1",
+  "description": "ansi control sequences for terminal cursor hopping and colors",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/bubkoo/ansi.js.git"
+  },
+  "keywords": [
+    "ansi",
+    "terminal",
+    "console",
+    "color",
+    "cursor",
+    "sequence",
+    "escape",
+    "control",
+    "stream",
+    "256",
+    "rgb",
+    "formatting"
+  ],
+  "author": "bubkoo",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/bubkoo/ansi.js/issues"
+  },
+  "homepage": "https://github.com/bubkoo/ansi.js"
+}
