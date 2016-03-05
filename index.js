@@ -25,6 +25,11 @@ function ansi(stream, options) {
   }
 }
 
+
 ansi.Cursor = Cursor;
+
+
+// exports
+// -------
 
 module.exports = ansi;
