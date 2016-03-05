@@ -12,17 +12,17 @@
   },
   "keywords": [
     "ansi",
+    "escape",
     "terminal",
     "console",
-    "color",
     "cursor",
-    "sequence",
-    "escape",
-    "control",
-    "stream",
+    "coloring",
+    "positioning",
+    "color",
     "256",
     "rgb",
-    "formatting"
+    "hex",
+    "stream"
   ],
   "author": "bubkoo",
   "license": "MIT",
