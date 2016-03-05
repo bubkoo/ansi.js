@@ -1,24 +1,24 @@
 #!/usr/bin/env node
 
-/**
- * Like GNU ncurses "clear" command.
- * https://github.com/mscdex/node-ncurses/blob/master/deps/ncurses/progs/clear.c
- */
-
-
 var cursor = require('../')(process.stdout);
 
-process.title = 'clear';
 
-function lf() {
-  return '\n';
-}
+cursor.write('Progress: 0 %');
 
+var i = 0;
 
-console.log(process.stdout.getWindowSize());
+var iv = setInterval(function () {
 
-//require('../')(process.stdout)
-//  .write(Array.apply(null, Array(process.stdout.getWindowSize()[1])).map(lf).join(''))
-//  .eraseData(2)
-//  .goto(1, 1)
+  cursor.backward(i.toString().length + 2);
+
+  i++;
+
+  cursor.write(i + ' %');
+
+  if (i === 100) {
+    cursor.write('\nDone!\n');
+    clearInterval(iv);
+  }
+
+}, 25);
 

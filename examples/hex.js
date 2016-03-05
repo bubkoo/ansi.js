@@ -1,31 +1,27 @@
 #!/usr/bin/env node
 
-var ansi   = require('../');
-var cursor = ansi(process.stdout);
+var cursor = require('../')(process.stdout);
+var hexArr = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F'];
+var hex    = ['0', '0', '0', '0', '0', '0'];
 
-var r = 0;
-var g = 0;
-var b = 0;
+function write() {
+  cursor.hex(hex.join('')).write('█');
+}
+
+write();
 
 var iv = setInterval(function () {
 
-  cursor
-    .rgb(r, g, b)
-    .write('█');
-
-  if (r < 255) {
-    r += 1;
-  } else {
-    if (g < 255) {
-      g += 1;
-    } else {
-      b += 1;
+  for (var i = 0; i < 6; i++) {
+    var index = hexArr.indexOf(hex[i]);
+    if (index < 15) {
+      hex[i] = hexArr[index + 1];
+      return write();
     }
   }
 
-  if (r >= 255 && g >= 255 && b > 255) {
-    clearInterval(iv);
-    cursor.write('\n');
-  }
+  clearInterval(iv);
+  cursor.fg.reset();
+  cursor.write('\n');
 
 }, 10);

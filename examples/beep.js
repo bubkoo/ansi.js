@@ -1,11 +1,18 @@
-var ansi   = require('../');
-var cursor = ansi(process.stdout);
+#!/usr/bin/env node
 
-console.log(' AAAA AAAA AAAA AAAA AAAA');
-console.log(' BBBB BBBB BBBB BBBB BBBB');
-console.log(' CCCC CCCC CCCC CCCC CCCC');
-console.log(' DDDD DDDD DDDD DDDD DDDD');
-console.log(' EEEE EEEE EEEE EEEE EEEE');
+/*
+ * Invokes the terminal `beep` sound once
+ * per second on every exact second.
+ */
 
 
-cursor.move(5, -1).eraseLeft();//.write('====');
+process.title = 'beep';
+
+var cursor = require('../')(process.stdout);
+
+function beep() {
+  cursor.beep();
+  setTimeout(beep, 1000 - (new Date()).getMilliseconds());
+}
+
+setTimeout(beep, 1000 - (new Date()).getMilliseconds());
