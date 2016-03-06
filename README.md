@@ -98,13 +98,52 @@ Any `Stream` instance, for terminal it would be `process.stdout`.
 
 ### stream
 
+The `Stream` instance.
+
 ### enabled
+
+Passed by `options`, when `enabled` is false then all the methods are no-ops except for `write()`.
 
 ### buffering
 
+Passed by `options`, when `buffering` is true, then `write()` calls are buffered in memory until `flush()` is invoked.
+
 ### fg(foreground)
 
+Instance of `Colour`, provides many useful methods for setting foreground color.
+
+1. Set by color names:
+
+```js
+cursor.fg.white(); // or cursor.foreground.white();
+```
+
+Valid color names:
+
+- black
+- red
+- green
+- yellow
+- blue
+- magenta
+- cyan
+- white
+- grey
+- brightBlack
+- brightRed
+- brightGreen
+- brightYellow
+- brightBlue
+- brightMagenta
+- brightCyan
+- brightWhite
+
+2. Set by `rgb(r, g, b)`
+3. Set by `hex(color)`
+
 ### bg(background)
+
+Instance of `Colour`, provides many useful methods for setting background color.
 
 ### font
 
