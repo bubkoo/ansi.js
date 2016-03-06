@@ -197,7 +197,6 @@ cursor
   .write('this background is green.');
 ```
 
-
 ### font
 
 Instance of `Font`, for setting font styles with these methods:
