@@ -112,11 +112,7 @@ Passed by `options`, when `buffering` is true, then `write()` calls are buffered
 
 Instance of `Colour`, provides many useful methods for setting foreground color.
 
-1. Set by color names:
-
-```js
-cursor.fg.white(); // or cursor.foreground.white();
-```
+#### Set by color names: `cursor.fg.white()`
 
 Valid color names:
 
@@ -138,8 +134,38 @@ Valid color names:
 - brightCyan
 - brightWhite
 
-2. Set by `rgb(r, g, b)`
-3. Set by `hex(color)`
+#### Set by `rgb(r, g, b)`
+
+Arguments are the values of color channels, should be `0-255`. 
+
+#### Set by `hex(color)`
+
+`color` is CSS color string, such as: `"#FF0000"`
+
+**PS:** All the above methods of `bg` was attached on `cursor` with the same method name. And these methods are chainable:
+
+```js
+cursor
+  .blue()
+  .write('This is blue.')
+  .green()
+  .write('this is green.');
+
+// with the `fg` property
+cursor
+  .fg.blue().end()
+  .write('This is blue.')
+  .fg.green().end()
+  .write('this is green.');
+```
+
+#### `end()`
+
+End the methods calling of `bg`, return `Cursor` instance for chain calling.
+
+#### `reset()`
+
+Reset the current foreground color to the default setting.
 
 ### bg(background)
 
