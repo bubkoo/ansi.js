@@ -1,7 +1,7 @@
 {
   "name": "ansi.js",
-  "version": "0.0.1",
-  "description": "ansi control sequences for terminal cursor hopping and colors",
+  "version": "0.0.2",
+  "description": "ansi escape sequences for terminal cursor positioning and coloring",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
