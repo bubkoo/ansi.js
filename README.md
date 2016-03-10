@@ -86,7 +86,6 @@ var ansi   = require('ansi.js');
 var cursor = ansi(stream, options);
 ```
 
-
 ### stream
 
 Any `Stream` instance, for terminal it would be `process.stdout`.
@@ -94,8 +93,22 @@ Any `Stream` instance, for terminal it would be `process.stdout`.
 
 ### options
 
- - `options.enabled` when `enabled` is false then all the methods are no-ops except for `write()`.
- - `options.buffering` when `buffering` is true, then `write()` calls are buffered in memory until `flush()` is invoked.
+#### `enabled`
+
+When `enabled` is `false` then all the methods are no-ops except for `write()`.
+Default `true`.
+
+#### `buffering`
+
+When `buffering` is true, then `write()` calls are buffered in memory until `flush()` is invoked.
+
+Default `false`.
+
+#### `lineTrack`
+
+Keep track of the number of `newline` that get encountered.
+
+Default `false`.
 
 
 ## Properties
@@ -115,6 +128,9 @@ Passed by `options`, when `enabled` is false then all the methods are no-ops exc
 
 Passed by `options`, when `buffering` is true, then `write()` calls are buffered in memory until `flush()` is invoked.
 
+### newline
+ 
+The number of new line that get encountered when `options.lineTrack` is `true`.
 
 ### fg/foreground
 
