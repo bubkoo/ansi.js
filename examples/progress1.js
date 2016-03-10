@@ -4,7 +4,7 @@ var assert = require('assert');
 var ansi   = require('../');
 
 function Progress(stream, width) {
-  this.cursor     = ansi(stream);
+  this.cursor     = ansi(stream, { lineTrack: true });
   this.delta      = this.cursor.newlines;
   this.width      = width | 0 || 10;
   this.open       = '[';
