@@ -1,6 +1,6 @@
 {
   "name": "ansi.js",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "ansi escape sequences for terminal cursor positioning and coloring",
   "main": "index.js",
   "scripts": {
