@@ -1,6 +1,6 @@
 {
   "name": "ansi.js",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "ansi escape sequences for terminal cursor positioning and coloring",
   "main": "index.js",
   "scripts": {
@@ -29,5 +29,8 @@
   "bugs": {
     "url": "https://github.com/bubkoo/ansi.js/issues"
   },
-  "homepage": "https://github.com/bubkoo/ansi.js"
+  "homepage": "https://github.com/bubkoo/ansi.js",
+  "dependencies": {
+    "on-new-line": "0.0.1"
+  }
 }
