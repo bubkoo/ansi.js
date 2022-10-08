@@ -1,31 +1,27 @@
-#!/usr/bin/env node
+const { ansi } = require('../lib')
 
-var cursor = require('../')(process.stdout);
+const cursor = ansi(process.stdout)
 
-var r = 0;
-var g = 0;
-var b = 0;
+let r = 0
+let g = 0
+let b = 0
 
 var iv = setInterval(function () {
-
-  cursor
-    .rgb(r, g, b)
-    .write('█');
+  cursor.rgb(r, g, b).write('█')
 
   if (r < 255) {
-    r += 1;
+    r += 1
   } else {
     if (g < 255) {
-      g += 1;
+      g += 1
     } else {
-      b += 1;
+      b += 1
     }
   }
 
   if (r >= 255 && g >= 255 && b > 255) {
-    clearInterval(iv);
-    cursor.fg.reset();
-    cursor.write('\n');
+    clearInterval(iv)
+    cursor.foreground.reset()
+    cursor.write('\n')
   }
-
-}, 10);
+}, 10)

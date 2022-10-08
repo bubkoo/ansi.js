@@ -1,24 +1,20 @@
-#!/usr/bin/env node
+const { ansi } = require('../lib')
 
-var cursor = require('../')(process.stdout);
+const cursor = ansi(process.stdout)
 
+cursor.write('Progress: 0 %')
 
-cursor.write('Progress: 0 %');
-
-var i = 0;
+let i = 0
 
 var iv = setInterval(function () {
+  cursor.backward(i.toString().length + 2)
 
-  cursor.backward(i.toString().length + 2);
+  i++
 
-  i++;
-
-  cursor.write(i + ' %');
+  cursor.write(`${i} %`)
 
   if (i === 100) {
-    cursor.write('\nDone!\n');
-    clearInterval(iv);
+    cursor.write('\nDone!\n')
+    clearInterval(iv)
   }
-
-}, 25);
-
+}, 25)

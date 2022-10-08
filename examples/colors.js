@@ -1,20 +1,16 @@
-#!/usr/bin/env node
+const { ansi } = require('../lib')
+const consts = require('../lib/constants')
 
-var cursor = require('../')(process.stdout);
-var consts = require('../lib/consts');
-var colors = Object.keys(consts.colors);
+const cursor = ansi(process.stdout)
 
-var iv = setInterval(function () {
-
-  var colorName = colors.pop();
-
+const colors = Object.keys(consts.colors)
+const iv = setInterval(() => {
+  const colorName = colors.pop()
   if (colorName) {
-    cursor[colorName]().write('█');
+    cursor[colorName]().write('█')
   } else {
-    clearInterval(iv);
-    cursor.fg.reset();
-    cursor.write('\n');
+    clearInterval(iv)
+    cursor.foreground.reset()
+    cursor.write('\n')
   }
-
-}, 10);
-
+}, 10)

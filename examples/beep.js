@@ -1,18 +1,17 @@
-#!/usr/bin/env node
-
 /*
  * Invokes the terminal `beep` sound once
  * per second on every exact second.
  */
 
+const { ansi } = require('../lib')
 
-process.title = 'beep';
+const cursor = ansi(process.stdout)
 
-var cursor = require('../')(process.stdout);
+process.title = 'beep'
 
 function beep() {
-  cursor.beep();
-  setTimeout(beep, 1000 - (new Date()).getMilliseconds());
+  cursor.beep()
+  setTimeout(beep, 1000 - new Date().getMilliseconds())
 }
 
-setTimeout(beep, 1000 - (new Date()).getMilliseconds());
+setTimeout(beep, 1000 - new Date().getMilliseconds())

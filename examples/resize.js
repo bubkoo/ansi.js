@@ -1,49 +1,47 @@
-#!/usr/bin/env node
+const { ansi } = require('../lib')
 
-var cursor = require('../')(process.stdout);
+const cursor = ansi(process.stdout)
 
-var queue = (function () {
-
-  var tasks   = [];
-  var pending = false;
+const queue = (function () {
+  let tasks = []
+  let pending = false
 
   return {
-    abort: function () {
-      tasks = [];
-      next();
+    abort() {
+      tasks = []
+      next()
     },
-    push : function (t) {
-      tasks.push(t);
+    push(t) {
+      tasks.push(t)
       if (!pending) {
-        next();
+        next()
       }
-    }
-  };
+    },
+  }
 
   function next() {
-    pending = true;
+    pending = true
     process.nextTick(function () {
       if (tasks.length === 0) {
-        return;
+        return
       }
-      var t = tasks.shift();
-      t();
-      pending = false;
-      next();
-    });
+      const t = tasks.shift()
+      t()
+      pending = false
+      next()
+    })
   }
-})();
+})()
 
-process.stdout.on('resize', draw);
+process.stdout.on('resize', draw)
 
-draw();
+draw()
 
 function draw() {
+  const cols = process.stdout.columns
+  const rows = process.stdout.rows
 
-  var cols = process.stdout.columns;
-  var rows = process.stdout.rows;
-
-  queue.abort();
+  queue.abort()
 
   queue.push(function () {
     cursor
@@ -51,19 +49,13 @@ function draw() {
       .reset()
       .magenta()
       .moveTo(1, 1)
-      .write(Array(cols + 1).join('█') + '\n');
-  });
+      .write(`${Array(cols + 1).join('█')}\n`)
+  })
 
-  for (var x = 2; x < rows; x++) {
-    (function (x) {
-      queue.push(function () {
-        cursor
-          .moveTo(x, 1)
-          .write('█')
-          .moveTo(x, cols)
-          .write('█');
-      });
-    })(x);
+  for (let x = 2; x < rows; x++) {
+    queue.push(function () {
+      cursor.moveTo(x, 1).write('█').moveTo(x, cols).write('█')
+    })
   }
 
   queue.push(function () {
@@ -72,8 +64,8 @@ function draw() {
       .write(Array(cols + 1).join('█'))
       .moveTo(Math.floor(rows / 2), Math.floor(cols / 2))
       .write('█')
-      .fg.reset();
-  });
+      .foreground.reset()
+  })
 }
 
-process.stdin.read();
+process.stdin.read()

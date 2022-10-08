@@ -1,14 +1,29 @@
 {
   "name": "ansi.js",
-  "version": "0.0.5",
+  "version": "1.0.0",
   "description": "ansi escape sequences for terminal cursor positioning and coloring",
-  "main": "index.js",
+  "main": "lib/index.js",
+  "module": "es/index.js",
+  "types": "lib/index.d.ts",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "lint": "eslint 'src/**/*.{js,ts}?(x)' --fix",
+    "clean": "rimraf es lib",
+    "build:esm": "tsc --module esnext --target es2017 --outDir ./es",
+    "build:cjs": "tsc --module commonjs --target es5 --outDir ./lib",
+    "build": "run-s build:esm build:cjs",
+    "prebuild": "run-s lint clean",
+    "prepare": "is-ci || husky install .husky"
   },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/bubkoo/ansi.js.git"
+  "lint-staged": {
+    "**/*.{js,jsx,tsx,ts,less,md,json}": [
+      "pretty-quick —-staged"
+    ],
+    "*.ts": [
+      "eslint --fix"
+    ]
+  },
+  "release": {
+    "extends": "@bubkoo/semantic-release-config"
   },
   "keywords": [
     "ansi",
@@ -26,11 +41,37 @@
   ],
   "author": "bubkoo",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/bubkoo/ansi.js.git"
+  },
   "bugs": {
     "url": "https://github.com/bubkoo/ansi.js/issues"
   },
   "homepage": "https://github.com/bubkoo/ansi.js",
   "dependencies": {
-    "on-new-line": "0.0.1"
+    "on-new-line": "1.0.0"
+  },
+  "devDependencies": {
+    "@bubkoo/commitlint-config": "^1.0.1",
+    "@bubkoo/eslint-config": "^1.2.0",
+    "@bubkoo/semantic-release-config": "^1.3.0",
+    "@bubkoo/tsconfig": "^1.0.0",
+    "@types/node": "^18.8.3",
+    "eslint": "^8.25.0",
+    "husky": "^8.0.1",
+    "is-ci": "^3.0.1",
+    "npm-run-all": "^4.1.5",
+    "prettier": "^2.7.1",
+    "pretty-quick": "^3.1.3",
+    "rimraf": "^3.0.2",
+    "rollup": "^2.79.1",
+    "semantic-release": "^19.0.5",
+    "tslib": "^2.4.0",
+    "typescript": "^4.8.4"
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org"
   }
 }

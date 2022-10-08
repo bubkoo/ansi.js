@@ -1,36 +1,31 @@
-#!/usr/bin/env node
+const { ansi } = require('../lib')
 
-var cursor = require('../')(process.stdout);
+const cursor = ansi(process.stdout)
 
-cursor
-  .eraseScreen()
-  .reset();
+cursor.eraseScreen().reset()
 
-var radius = 5;
-var theta  = 0;
-var points = [];
+const radius = 5
+let theta = 0
+let points = []
 
 setInterval(function () {
-  var x = 2 + (radius + Math.cos(theta) * radius) * 2;
-  var y = 2 + radius + Math.sin(theta) * radius;
+  const x = 2 + (radius + Math.cos(theta) * radius) * 2
+  const y = 2 + radius + Math.sin(theta) * radius
 
-  points.unshift([x, y]);
+  points.unshift([x, y])
 
-  var colors = ['red', 'yellow', 'green', 'cyan', 'blue', 'magenta'];
+  const colors = ['red', 'yellow', 'green', 'cyan', 'blue', 'magenta']
 
   points.forEach(function (p, i) {
+    cursor.moveTo(p[0], p[1])
 
-    cursor.moveTo(p[0], p[1]);
+    const c = colors[Math.floor(i / 12)]
 
-    var c = colors[Math.floor(i / 12)];
-
-    cursor.bg[c]();
+    cursor.background[c]()
     cursor.write(' ')
+  })
 
-  });
+  points = points.slice(0, 12 * colors.length - 1)
 
-  points = points.slice(0, 12 * colors.length - 1);
-
-  theta += Math.PI / 40;
-
-}, 50);
+  theta += Math.PI / 40
+}, 50)
